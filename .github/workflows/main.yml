@@ -32,6 +32,18 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+
+      # application.properties 파일을 생성합니다.
+      - name: Set up application.properties
+        run: |
+          mkdir -p ./Back/src/main/resources
+          echo "${{ secrets.APPLICATION }}" > ./Back/src/main/resources/application.properties
+          
+      # application.properties 파일이 올바르게 생성되었는지 확인합니다.
+      - name: Verify application.properties file
+        run: |
+          ls -R ./Back/src/main/resources
+          cat ./Back/src/main/resources/application.properties
           
       # gradlew 파일에 실행 권한을 부여합니다.
       - name: Grant execute permission for gradlew
