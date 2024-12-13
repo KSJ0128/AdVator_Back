@@ -75,5 +75,5 @@ jobs:
 
       - name: Execute deploy script
         run: |
-          ssh -i /home/runner/.ssh/movie-book -o StrictHostKeyChecking=no mycapisnavy@${{ secrets.GCP_HOST }} "chmod +x /home/mycapisnavy/cicd/deploy.sh && sh /home/mycapisnavy/cicd/deploy.sh"shell: bash
+          ssh -i /home/runner/.ssh/movie-book -o StrictHostKeyChecking=no mycapisnavy@${{ secrets.GCP_HOST }} "chmod +x /home/mycapisnavy/cicd/deploy.sh && sh /home/mycapisnavy/cicd/deploy.sh"
         shell: bash
