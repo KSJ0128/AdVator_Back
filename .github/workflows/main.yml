@@ -73,8 +73,7 @@ jobs:
           scp -i /home/runner/.ssh/movie-book -o StrictHostKeyChecking=no deploy.sh mycapisnavy@${{ secrets.GCP_HOST }}:/home/mycapisnavy/cicd/
         shell: bash
 
-      # 원격 서버에서 배포 스크립트를 실행합니다.
       - name: Execute deploy script
         run: |
-          ssh -i /home/runner/.ssh/movie-book -o StrictHostKeyChecking=no mycapisnavy@${{ secrets.GCP_HOST }} chmod +x /home/mycapisnavy/cicd/deploy.sh && sh /home/mycapisnavy/cicd/deploy.sh"
+          ssh -i /home/runner/.ssh/movie-book -o StrictHostKeyChecking=no mycapisnavy@${{ secrets.GCP_HOST }} "chmod +x /home/mycapisnavy/cicd/deploy.sh && sh /home/mycapisnavy/cicd/deploy.sh"shell: bash
         shell: bash
