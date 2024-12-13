@@ -36,12 +36,12 @@ jobs:
       # gradlew 파일에 실행 권한을 부여합니다.
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        working-directory: movie-book
+        working-directory: advator
 
       # Gradle을 사용해 프로젝트를 빌드합니다.
       - name: Build with Gradle
         run: ./gradlew clean build
-        working-directory: movie-book
+        working-directory: advator
 
       # 원격 서버에 대상 디렉터리가 없는 경우 생성
       - name: Create target directory on remote server
