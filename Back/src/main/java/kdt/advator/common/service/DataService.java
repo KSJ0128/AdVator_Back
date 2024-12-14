@@ -1,7 +1,10 @@
 package kdt.advator.common.service;
 
-import kdt.advator.common.domain.Apart;
-import kdt.advator.common.repository.ApartRepository;
+import kdt.advator.common.domain.*;
+import kdt.advator.common.dto.DefaultInfoDTO;
+import kdt.advator.common.dto.DistrictDTO;
+import kdt.advator.common.dto.LocationDTO;
+import kdt.advator.common.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -20,8 +23,16 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CommonService {
+public class DataService {
     private final ApartRepository apartRepository;
+    private final CompanyRepository companyRepository;
+    private final IndustryRepository industryRepository;
+    private final BusinessRepository businessRepository;
+    private final RatingRepository ratingRepository;
+    private final PeriodRepository periodRepository;
+    private final CityRepository cityRepository;
+    private final DistrictRepository districtRepository;
+    private final AreaRepository areaRepository;
     private final String defaultURL = "https://dapi.kakao.com/v2/local/search/address.json";
 
     @Value("${kakao.api.key}") // application.yml에 Kakao API 키 저장
@@ -88,5 +99,70 @@ public class CommonService {
                 e.printStackTrace();
             }
         }
+    }
+
+    public DefaultInfoDTO getInfo() {
+        List<String> company = companyRepository.findAll().stream()
+                .map(Company::getName)
+                .toList();
+
+        List<String> industry = industryRepository.findAll().stream()
+                .map(Industry::getName)
+                .toList();
+
+        List<String> business = businessRepository.findAll().stream()
+                .map(Business::getName)
+                .toList();
+
+        List<String> rating = ratingRepository.findAll().stream()
+                .map(Rating::getName)
+                .toList();
+
+        List<String> period = periodRepository.findAll().stream()
+                .map(Period::getPeriod)
+                .toList();
+
+        return DefaultInfoDTO.builder()
+                .company(company)
+                .industry(industry)
+                .business(business)
+                .rating(rating)
+                .period(period)
+                .city(getLocations())
+                .build();
+    }
+
+    private List<LocationDTO> getLocations() {
+        // 1. 데이터베이스에서 city 객체 리스트 가져오기
+        List<City> cities = cityRepository.findAll();
+
+        // 2. 각 city에 대해 District와 Area 가져오기
+        List<LocationDTO> locations = cities.stream()
+                .map(city -> {
+                    // 각 city에 해당하는 District 객체 가져오기
+                    List<District> districts = districtRepository.findByCity(city);
+
+                    // 각 District에 해당하는 Area 객체 처리
+                    List<DistrictDTO> districtDTOs = districts.stream()
+                            .map(district -> {
+                                // 각 District에 해당하는 Area 객체 가져오기
+                                List<Area> areas = areaRepository.findByDistrict(district);
+
+                                // Area 객체에서 이름 추출
+                                List<String> areaNames = areas.stream()
+                                        .map(Area::getName)
+                                        .toList();
+
+                                // DistrictDTO 생성
+                                return new DistrictDTO(district.getName(), areaNames);
+                            })
+                            .toList();
+
+                    // LocationDTO 생성
+                    return new LocationDTO(city.getName(), districtDTOs);
+                })
+                .toList();
+
+        return locations;
     }
 }
