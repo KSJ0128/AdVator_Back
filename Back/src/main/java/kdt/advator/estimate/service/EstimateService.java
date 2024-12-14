@@ -79,15 +79,12 @@ public class EstimateService {
 //    }
 
     private void sendMailToAdServer(User user, InquiryDTO inquiryDTO) {
-        String replyEmail = user.getEmail();
-
-        sendToFocusServer(inquiryDTO, replyEmail);
-        sendToKTServer(inquiryDTO, replyEmail);
-        sendToMediaServer(inquiryDTO, replyEmail);
-
+        sendToFocusServer(inquiryDTO, user);
+        sendToKTServer(inquiryDTO, user);
+        sendToMediaServer(inquiryDTO, user);
     }
 
-    private void sendToFocusServer(InquiryDTO inquiryDTO, String replyEmail) {
+    private void sendToFocusServer(InquiryDTO inquiryDTO, User user) {
         List<FocusMediaKorea> focusMediaKoreaList = inquiryDTO.getFocusMediaKoreaList();
         String toEmail = "20201028@sungshin.ac.kr";
         String focusAd = "포커스 미디어 코리아";
@@ -104,13 +101,13 @@ public class EstimateService {
         }
 
         try {
-            mailService.joinEmail(replyEmail, toEmail, focusAd);
+            mailService.joinEmail(user, toEmail, focusAd, inquiryDTO);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void sendToKTServer(InquiryDTO inquiryDTO, String replyEmail) {
+    private void sendToKTServer(InquiryDTO inquiryDTO, User user) {
         List<KTTownBoard> ktTownBoardList = inquiryDTO.getKtTownBoardList();
         String toEmail = "20201028@sungshin.ac.kr";
         String ktAd = "KT 타운보드";
@@ -127,13 +124,13 @@ public class EstimateService {
         }
 
         try {
-            mailService.joinEmail(replyEmail, toEmail, ktAd);
+            mailService.joinEmail(user, toEmail, ktAd, inquiryDTO);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void sendToMediaServer(InquiryDTO inquiryDTO, String replyEmail) {
+    private void sendToMediaServer(InquiryDTO inquiryDTO, User user) {
         List<MediaMid> mediaMidList = inquiryDTO.getMediaMidList();
         String toEmail = "20201028@sungshin.ac.kr";
         String mediaAd = "미디어 믿";
@@ -150,7 +147,7 @@ public class EstimateService {
         }
 
         try {
-            mailService.joinEmail(replyEmail, toEmail, mediaAd);
+            mailService.joinEmail(user, toEmail, mediaAd, inquiryDTO);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

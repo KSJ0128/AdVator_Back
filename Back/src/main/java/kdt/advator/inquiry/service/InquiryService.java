@@ -88,6 +88,7 @@ public class InquiryService {
             if (company.getName().equals(focusAD)) {
                 FocusMediaKorea focusMediaKorea = FocusMediaKorea.builder()
                         .apart(apartRepository.findByApartName(apart.getApartName()))
+                        .start(advertiseReq.getStart())
                         .user(user)
                         .period(periodRepository.findByPeriod(advertiseReq.getPeriod()))
                         .build();
@@ -99,6 +100,7 @@ public class InquiryService {
                 KTTownBoard ktTownBoard = KTTownBoard.builder()
                         .apart(apartRepository.findByApartName(apart.getApartName()))
                         .user(user)
+                        .start(advertiseReq.getStart())
                         .period(periodRepository.findByPeriod(advertiseReq.getPeriod()))
                         .build();
 
@@ -109,6 +111,7 @@ public class InquiryService {
                 MediaMid mediaMid = MediaMid.builder()
                         .apart(apartRepository.findByApartName(apart.getApartName()))
                         .user(user)
+                        .start(advertiseReq.getStart())
                         .period(periodRepository.findByPeriod(advertiseReq.getPeriod()))
                         .build();
 

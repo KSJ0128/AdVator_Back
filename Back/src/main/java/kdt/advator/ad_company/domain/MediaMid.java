@@ -14,10 +14,10 @@ public class MediaMid {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long number;
-
     @ManyToOne
     @JoinColumn(name = "apart_number", nullable = false)
     private Apart apart;
+    private String start;
     @ManyToOne
     @JoinColumn(name = "period_number", nullable = false)
     private Period period;
@@ -26,9 +26,10 @@ public class MediaMid {
     private User user;
 
     @Builder
-    public MediaMid(Apart apart, Period period, User user) {
+    public MediaMid(Apart apart, Period period, User user, String start) {
         this.apart = apart;
         this.period = period;
         this.user = user;
+        this.start = start;
     }
 }

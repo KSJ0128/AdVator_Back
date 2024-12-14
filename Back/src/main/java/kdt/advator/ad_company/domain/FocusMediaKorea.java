@@ -17,6 +17,7 @@ public class FocusMediaKorea {
     @ManyToOne
     @JoinColumn(name = "apart_number", nullable = false)
     private Apart apart;
+    private String start;
     @ManyToOne
     @JoinColumn(name = "period_number", nullable = false)
     private Period period;
@@ -25,9 +26,10 @@ public class FocusMediaKorea {
     private User user;
 
     @Builder
-    public FocusMediaKorea(Apart apart, Period period, User user) {
+    public FocusMediaKorea(Apart apart, Period period, User user, String start) {
         this.apart = apart;
         this.period = period;
         this.user = user;
+        this.start = start;
     }
 }
