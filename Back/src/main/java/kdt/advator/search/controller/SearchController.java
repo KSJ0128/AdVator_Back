@@ -19,9 +19,12 @@ public interface SearchController {
     @Operation(summary = "지도 건물 조회 - 주소 API", description = "주소를 기준으로 지도 상의 건물을 조회하는 API입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "건물 조회에 성공했습니다.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "204", description = "건물이 존재하지 않습니다.", content = @Content(mediaType = "application/json"))
     })
     public ResponseEntity<List<ApartDTO>> getApartsByAddress(@RequestBody SearchApartDTO searchApartDTO);
 
+    @Operation(summary = "지도 건물 조회 - gps API", description = "gps를 기준으로 지도 상의 건물을 조회하는 API입니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "건물 조회에 성공했습니다.", content = @Content(mediaType = "application/json")),
+    })
     public ResponseEntity<List<ApartDTO>> getApartsByGps(@RequestBody SearchGpsDTO searchGpsDTO);
 }
