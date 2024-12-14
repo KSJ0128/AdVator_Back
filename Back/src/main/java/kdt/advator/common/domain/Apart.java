@@ -3,10 +3,12 @@ package kdt.advator.common.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "apart")
 @Getter
+@Setter
 @NoArgsConstructor
 public class Apart {
     @Id
@@ -19,6 +21,10 @@ public class Apart {
     private String lotAddress;
     @Column(name = "road_address")
     private String roadAddress;
+    @Column(name = "gps_x")
+    private Double gpsX;
+    @Column(name = "gps_y")
+    private Double gpsY;
     @Column(name = "tv_count")
     private Long tvCount;
     @Column(name = "unit_price")
