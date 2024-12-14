@@ -19,7 +19,7 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Apart> findByConditions(String city, String district, String area, String rating, String company) {
+    public List<Apart> findByConditions(String city, String district, String area, List<String> rating, List<String> company) {
         QApart a = QApart.apart;
         QEstimate e = QEstimate.estimate;
         BooleanBuilder conditions = new BooleanBuilder();
@@ -56,23 +56,27 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
         return roadAddressConditions;
     }
 
-    private BooleanBuilder ratingEquals(String rating) {
+    private BooleanBuilder ratingEquals(List<String> ratingList) {
         BooleanBuilder ratingConditions = new BooleanBuilder();
         QApart a = QApart.apart;
 
-        if (rating != null) {
-            ratingConditions.and(a.rating.name.eq(rating));
+        if (ratingList != null) {
+            for (String rating : ratingList) {
+                ratingConditions.or(a.rating.name.eq(rating));
+            }
         }
 
         return ratingConditions;
     }
 
-    private BooleanBuilder companyEquals(String company) {
+    private BooleanBuilder companyEquals(List<String> companyList) {
         BooleanBuilder companyConditions = new BooleanBuilder();
         QApart a = QApart.apart;
 
-        if (company != null) {
-            companyConditions.and(a.company.name.eq(company));
+        if (companyList != null) {
+            for (String company : companyList) {
+                companyConditions.or(a.company.name.eq(company));
+            }
         }
 
         return companyConditions;
