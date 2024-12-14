@@ -1,4 +1,4 @@
-package kdt.advator.advator.advertise.domain;
+package kdt.advator.advertise.domain;
 
 import jakarta.persistence.*;
 import kdt.advator.common.domain.*;
