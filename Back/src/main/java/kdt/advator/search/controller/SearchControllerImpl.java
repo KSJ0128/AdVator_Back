@@ -2,6 +2,7 @@ package kdt.advator.search.controller;
 
 import kdt.advator.common.dto.ApartDTO;
 import kdt.advator.search.dto.SearchApartDTO;
+import kdt.advator.search.dto.SearchGpsDTO;
 import kdt.advator.search.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,15 @@ public class SearchControllerImpl implements SearchController {
 
     @PostMapping("/address")
     public ResponseEntity<List<ApartDTO>> getApartsByAddress(@RequestBody SearchApartDTO searchApartDTO) {
-        List<ApartDTO> apartDTOList = searchService.getApartByAddress(searchApartDTO);
-        if (apartDTOList == null)
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-        return ResponseEntity.status(HttpStatus.OK).body(apartDTOList);
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.getApartByAddress(searchApartDTO));
     }
+
+    @PostMapping("/gps")
+    public ResponseEntity<List<ApartDTO>> getApartsByGps(@RequestBody SearchGpsDTO searchGpsDTO) {
+        if (searchGpsDTO.getGpsX() == null || searchGpsDTO.getGpsY() == null)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.getApartByGps(searchGpsDTO));
+    }
+
 }

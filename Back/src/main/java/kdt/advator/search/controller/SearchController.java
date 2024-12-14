@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kdt.advator.common.dto.ApartDTO;
 import kdt.advator.search.dto.SearchApartDTO;
+import kdt.advator.search.dto.SearchGpsDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,4 +22,6 @@ public interface SearchController {
             @ApiResponse(responseCode = "204", description = "건물이 존재하지 않습니다.", content = @Content(mediaType = "application/json"))
     })
     public ResponseEntity<List<ApartDTO>> getApartsByAddress(@RequestBody SearchApartDTO searchApartDTO);
+
+    public ResponseEntity<List<ApartDTO>> getApartsByGps(@RequestBody SearchGpsDTO searchGpsDTO);
 }
