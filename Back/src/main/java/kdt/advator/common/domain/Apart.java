@@ -2,10 +2,12 @@ package kdt.advator.common.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "apart")
 @Getter
+@NoArgsConstructor
 public class Apart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

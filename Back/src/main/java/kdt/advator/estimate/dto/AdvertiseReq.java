@@ -3,11 +3,13 @@ package kdt.advator.estimate.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import kdt.advator.common.dto.ApartDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @Schema(description = "15초 광고 견적 요청 DTO")
+@NoArgsConstructor
 public class AdvertiseReq {
     @Schema(description = "아파트 목록")
     private List<ApartDTO> apart;
