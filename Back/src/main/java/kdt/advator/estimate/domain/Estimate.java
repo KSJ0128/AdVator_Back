@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 @Entity
 @Table(name = "estimate")
@@ -23,8 +22,8 @@ public class Estimate {
     private Apart apart;
 
     @Builder
-    public Estimate(Apart apart) {
+    public Estimate(Apart apart, Long request) {
         this.apart = apart;
-        this.request = 1L;
+        this.request = request;
     }
 }
