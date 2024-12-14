@@ -37,7 +37,7 @@ public class DataService {
 
     @Value("${kakao.api.key}") // application.yml에 Kakao API 키 저장
     private String kakaoApiKey;
-
+/*
     @Transactional
     public void saveApartGps() {
         List<Apart> apartList = apartRepository.findAll();
@@ -100,7 +100,7 @@ public class DataService {
             }
         }
     }
-
+*/
     public DefaultInfoDTO getInfo() {
         List<String> company = companyRepository.findAll().stream()
                 .map(Company::getName)
