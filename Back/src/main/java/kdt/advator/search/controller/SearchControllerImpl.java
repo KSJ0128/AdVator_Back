@@ -18,9 +18,6 @@ public class SearchControllerImpl implements SearchController {
 
     @PostMapping("/address")
     public ResponseEntity<List<ApartDTO>> getApartsByAddress(@RequestBody SearchApartDTO searchApartDTO) {
-        List<ApartDTO> apartDTOList = searchService.getApartByAddress(searchApartDTO);
-        if (apartDTOList == null)
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-        return ResponseEntity.status(HttpStatus.OK).body(apartDTOList);
+        return ResponseEntity.status(HttpStatus.OK).body(searchService.getApartByAddress(searchApartDTO));
     }
 }
