@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,11 +27,11 @@ public class SearchService {
                 searchApartDTO.getRating(), searchApartDTO.getCompany());
 
         if (apartList.isEmpty())
-            return null;
+            return new ArrayList<>();
 
         List<Estimate> estimateList = estimateService.getEstimateList(apartList);
         if (estimateList.isEmpty())
-            return null;
+            return new ArrayList<>();
 
         // DTO 리스트 생성 및 정렬
         return getApartDTOS(searchApartDTO, apartList, estimateList);
