@@ -25,13 +25,13 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
         BooleanBuilder conditions = new BooleanBuilder();
 
         if (city != null && !city.isEmpty())
-            conditions.and(roadAddressContains(city));
+            conditions.and(lotAddressContains(city));
 
         if (district != null && !district.isEmpty())
-            conditions.and(roadAddressContains(district));
+            conditions.and(lotAddressContains(district));
 
         if (area != null && !area.isEmpty())
-            conditions.and(roadAddressContains(area));
+            conditions.and(lotAddressContains(area));
 
         if (rating != null && !rating.isEmpty())
             conditions.and(ratingEquals(rating));
@@ -54,7 +54,7 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
         // 지구 반경 (km)
         Double earthRadius = 6371.0;
         // 고정 반경 값 설정 (1km)
-        Double radius = 2.0;
+        Double radius = 5.0;
 
         // Haversine 공식 구현
         NumberExpression<Double> distanceExpression = Expressions.numberTemplate(Double.class,
@@ -79,12 +79,12 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
                 .fetch();
     }
 
-    private BooleanBuilder roadAddressContains(String value) {
-        BooleanBuilder roadAddressConditions = new BooleanBuilder();
+    private BooleanBuilder lotAddressContains(String value) {
+        BooleanBuilder lotAddressConditions = new BooleanBuilder();
         QApart a = QApart.apart;
 
-        roadAddressConditions.and(a.roadAddress.contains(value));
-        return roadAddressConditions;
+        lotAddressConditions.and(a.lotAddress.contains(value));
+        return lotAddressConditions;
     }
 
     private BooleanBuilder ratingEquals(List<String> ratingList) {
