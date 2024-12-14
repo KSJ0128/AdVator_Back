@@ -1,9 +1,11 @@
 package kdt.advator.common.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "district")
+@Getter
 public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
