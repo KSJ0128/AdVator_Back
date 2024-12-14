@@ -20,9 +20,9 @@ public class SearchApartDTO {
     @Schema(description = "정렬 기준 (low: 저렴한 순, high: 비싼 순)", example = "low")
     private String sort;
 
-    @Schema(description = "평점 기준", example = "[A, S]")
+    @Schema(description = "평점 기준", example = "[\"S+\", \"A+\"]")
     private List<String> rating;
 
-    @Schema(description = "광고 업체명", example = "[포커스 미디어 코리아, 미디어 믿]")
+    @Schema(description = "광고 업체명", example = "[\"포커스 미디어 코리아\", \"미디어 믿\"]")
     private List<String> company;
 }
