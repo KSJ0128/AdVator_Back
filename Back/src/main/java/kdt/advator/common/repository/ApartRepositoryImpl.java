@@ -54,7 +54,7 @@ public class ApartRepositoryImpl implements ApartRepositoryCustom{
         // 지구 반경 (km)
         Double earthRadius = 6371.0;
         // 고정 반경 값 설정 (1km)
-        Double radius = 5.0;
+        Double radius = 1.0;
 
         // Haversine 공식 구현
         NumberExpression<Double> distanceExpression = Expressions.numberTemplate(Double.class,
