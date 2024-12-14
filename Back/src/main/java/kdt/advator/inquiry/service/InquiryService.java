@@ -7,12 +7,9 @@ import kdt.advator.ad_company.dto.InquiryDTO;
 import kdt.advator.ad_company.repository.FocusMediaKoreaRepository;
 import kdt.advator.ad_company.repository.KTTownBoardRepository;
 import kdt.advator.ad_company.repository.MediaMidRepository;
+import kdt.advator.common.domain.*;
 import kdt.advator.estimate.domain.Estimate;
 import kdt.advator.estimate.dto.AdvertiseReq;
-import kdt.advator.common.domain.Business;
-import kdt.advator.common.domain.Company;
-import kdt.advator.common.domain.Industry;
-import kdt.advator.common.domain.User;
 import kdt.advator.common.dto.ApartDTO;
 import kdt.advator.common.repository.*;
 import kdt.advator.estimate.repository.EstimateRepository;
@@ -59,6 +56,21 @@ public class InquiryService {
         return user;
     }
 
+//    @Transactional
+//    public boolean saveSplitAdInquiry(AdvertiseReq advertiseReq, User user) {
+//        List<SplitEstimate> estimateList = new ArrayList<>();
+//
+//        for (ApartDTO apartDTO : advertiseReq.getApart()) {
+//            Apart apart = apartRepository.findByApartName(apartDTO.getApartName());
+//            if (apart == null)
+//                return false;
+//
+//            estimateList.add(new SplitEstimate(advertiseReq, apart, user));
+//        }
+//        splitEstimateRepository.saveAll(estimateList);
+//        return true;
+//    }
+//
     @Transactional
     public InquiryDTO saveFullAdInquiry(AdvertiseReq advertiseReq, User user) {
         List<ApartDTO> apartList = advertiseReq.getApart();
@@ -72,6 +84,7 @@ public class InquiryService {
 
         for (ApartDTO apart : apartList) {
             Company company = companyRepository.findByName(apart.getCompany());
+
             if (company.getName().equals(focusAD)) {
                 FocusMediaKorea focusMediaKorea = FocusMediaKorea.builder()
                         .apart(apartRepository.findByApartName(apart.getApartName()))
@@ -122,7 +135,7 @@ public class InquiryService {
             Estimate estimate = estimateRepository.findByApart(apartRepository.findByApartName(apartDTO.getApartName()));
 
             if (estimate == null) {
-                estimate = new Estimate(apartRepository.findByApartName(apartDTO.getApartName()));
+                estimate = new Estimate(apartRepository.findByApartName(apartDTO.getApartName()), 1L);
             }
             else {
                 estimate.setRequest(estimate.getRequest() + 1);
