@@ -86,7 +86,7 @@ public class EstimateService {
 
     private void sendToFocusServer(InquiryDTO inquiryDTO, User user) {
         List<FocusMediaKorea> focusMediaKoreaList = inquiryDTO.getFocusMediaKoreaList();
-        String toEmail = "20201028@sungshin.ac.kr";
+        String toEmail = "tamanta713@gmail.com";
         String focusAd = "포커스 미디어 코리아";
         StringBuilder aparts = new StringBuilder();
 
