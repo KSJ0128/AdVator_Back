@@ -109,7 +109,7 @@ public class EstimateService {
 
     private void sendToKTServer(InquiryDTO inquiryDTO, User user) {
         List<KTTownBoard> ktTownBoardList = inquiryDTO.getKtTownBoardList();
-        String toEmail = "20201028@sungshin.ac.kr";
+        String toEmail = "wrusl420@gmail.com";
         String ktAd = "KT 타운보드";
         StringBuilder aparts = new StringBuilder();
 
@@ -132,7 +132,7 @@ public class EstimateService {
 
     private void sendToMediaServer(InquiryDTO inquiryDTO, User user) {
         List<MediaMid> mediaMidList = inquiryDTO.getMediaMidList();
-        String toEmail = "20201028@sungshin.ac.kr";
+        String toEmail = "ohsr420@hufs.ac.kr";
         String mediaAd = "미디어 믿";
         StringBuilder aparts = new StringBuilder();
 
