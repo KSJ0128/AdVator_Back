@@ -86,7 +86,7 @@ public class EstimateService {
 
     private void sendToFocusServer(InquiryDTO inquiryDTO, User user) {
         List<FocusMediaKorea> focusMediaKoreaList = inquiryDTO.getFocusMediaKoreaList();
-        String toEmail = "tamanta713@gmail.com";
+        String toEmail = "ohsurin@naver.com";
         String focusAd = "포커스 미디어 코리아";
         StringBuilder aparts = new StringBuilder();
 
@@ -109,7 +109,7 @@ public class EstimateService {
 
     private void sendToKTServer(InquiryDTO inquiryDTO, User user) {
         List<KTTownBoard> ktTownBoardList = inquiryDTO.getKtTownBoardList();
-        String toEmail = "wrusl420@gmail.com";
+        String toEmail = "tamanta713@naver.com";
         String ktAd = "KT 타운보드";
         StringBuilder aparts = new StringBuilder();
 
@@ -132,7 +132,7 @@ public class EstimateService {
 
     private void sendToMediaServer(InquiryDTO inquiryDTO, User user) {
         List<MediaMid> mediaMidList = inquiryDTO.getMediaMidList();
-        String toEmail = "ohsr420@hufs.ac.kr";
+        String toEmail = "art2sso_@naver.com";
         String mediaAd = "미디어 믿";
         StringBuilder aparts = new StringBuilder();
 
