@@ -79,9 +79,12 @@ public class EstimateService {
 //    }
 
     private void sendMailToAdServer(User user, InquiryDTO inquiryDTO) {
-        sendToFocusServer(inquiryDTO, user);
-        sendToKTServer(inquiryDTO, user);
-        sendToMediaServer(inquiryDTO, user);
+        if (!inquiryDTO.getFocusMediaKoreaList().isEmpty())
+            sendToFocusServer(inquiryDTO, user);
+        if (!inquiryDTO.getKtTownBoardList().isEmpty())
+            sendToKTServer(inquiryDTO, user);
+        if (!inquiryDTO.getMediaMidList().isEmpty())
+            sendToMediaServer(inquiryDTO, user);
     }
 
     private void sendToFocusServer(InquiryDTO inquiryDTO, User user) {
