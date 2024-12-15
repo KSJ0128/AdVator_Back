@@ -7,6 +7,7 @@ import kdt.advator.common.domain.User;
 import kdt.advator.estimate.dto.EmailDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,11 @@ public class MailService {
         helper.setTo(toEmail);
         // 이메일의 제목을 설정
         helper.setSubject(title);
+
+        // CID로 본문에 삽입할 이미지 추가
+        ClassPathResource imageResource = new ClassPathResource("static/img/banner.png"); // 이미지 파일 경로
+        helper.addInline("logoImage", imageResource); // "logoImage"는 CID 값
+
         // 이메일의 내용 설정 두 번째 매개 변수에 true를 설정하여 html 설정으로한다.
         helper.setText(content, true);
         mailSender.send(message);
@@ -45,6 +51,8 @@ public class MailService {
         String title = "[애드베이터] 견적 요청 – " + user.getStoreName() + " 사장님의 문의가 도착했습니다."; // 이메일 제목
         EmailDTO emailDTO = new EmailDTO(inquiryDTO, company);
         String content =
+                "<div>" +
+                        "<p><img src=\"cid:logoImage\" alt=\"애드베이터 로고\" style=\"width: 700px; height: auto;\" /></p>" +
                 "<p>" + company + " 담당자님, 안녕하세요?</p>" +
                         "<p>애드베이터를 통해 새로운 광고 견적 요청이 도착했습니다.</p>" +
                         "<ul>" +
@@ -61,7 +69,8 @@ public class MailService {
                         "</ul>" +
                         "<p>고객님께 빠른 시일 내에 견적서를 전달해주시기 바랍니다.</p>" +
                         "<p>감사합니다.</p>" +
-                        "<p>애드베이터 팀</p>";
+                        "<p>애드베이터 팀</p>" +
+                        "</div>";
         mailSend(user.getEmail(), ToEmail, title, content);
     }
 }
